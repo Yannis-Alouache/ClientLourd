@@ -14,6 +14,6 @@ public class BoatSelectionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(this.comboBox.getSelectedItem());
+
     }
 }

@@ -12,7 +12,7 @@ public class BoatSelection {
         this.db = db;
     }
 
-    public JComboBox getComboList() {
+    public JComboBox getComboBox() {
         JComboBox boatsList = new JComboBox();
         boatsList.addActionListener(new BoatSelectionListener(boatsList));
         ResultSet boatsName = this.db.getBoatsName();
