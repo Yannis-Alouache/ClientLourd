@@ -17,22 +17,31 @@ public class Window extends JFrame {
         this.db = db;
         BoatSelection boatSelection = new BoatSelection(db);
 
-
         setSize(800, 600);
         setTitle("Client Lourd");
-        addMouseListener(new MouseAdapter());
+
+        JComboBox boatsList = boatSelection.getComboBox();
+
+        JButton confirmBtn = new JButton();
+        confirmBtn.setText("Confirmer");
+        confirmBtn.setBackground(new Color(124,252,0));
+        confirmBtn.addActionListener(new ConfirmBoatSelectionListener(boatsList, this.db));
 
 
-        JComboBox boatsList = boatSelection.getComboList();
+        JTextArea textArea = new JTextArea();
+        textArea.setColumns(55);
+        textArea.setRows(5);
 
-
+        JLabel textAreaLabel = new JLabel("Commentaire (facultatif)");
+        textAreaLabel.setLabelFor(textArea);
 
 
         this.container = getContentPane();
-        this.container.setLayout(new FlowLayout());
-        this.container.add(boatsList);
-
-
+        this.container.setLayout(new BorderLayout());
+        this.container.add(boatsList, BorderLayout.NORTH);
+        this.container.add(textArea, BorderLayout.EAST);
+        this.container.add(textAreaLabel, BorderLayout.CENTER);
+        this.container.add(confirmBtn, BorderLayout.SOUTH);
 
         setVisible(true);
     }
