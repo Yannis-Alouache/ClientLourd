@@ -1,12 +1,28 @@
 package org.tp;
 import java.sql.*;
 import java.util.ArrayList;
-
 import static java.lang.System.exit;
 
+/**
+ * A service class used to get data from a database
+ */
 public class Db {
 
     private Connection conn;
+
+    /**
+     * Generate the connexion variable to access database data
+     * If the database informations are not valid or the JDBC class is not found an exception is thrown
+     *
+     * @param  host the ip on which the database is hosted
+     * @param  port the port that is open for the database
+     * @param  dbName the database name
+     * @param  user the database username
+     * @param  password the database password related to the user
+     * @see         SQLException
+     * @see         ClassNotFoundException
+     * @see         DriverManager
+     */
     public Db(String host, String port, String dbName, String user, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -17,10 +33,14 @@ public class Db {
         }
     }
 
-    public void close() {
-
-    }
-
+    /**
+     * Returns a boat from a given name
+     * Can throw an SQL exception
+     *
+     * @param  name the boat name to find
+     * @return      the boat with the specified name
+     * @see         SQLException
+     */
     public ResultSet getBoatByName(String name) {
         ArrayList<String> array = new ArrayList<String>();
         String sql = "Select * from bateau WHERE bateau.nom = ?";
@@ -38,6 +58,14 @@ public class Db {
         return res;
     }
 
+    /**
+     * Returns a boat from a given name with its equipements and Image URL
+     * Can throw an SQL exception
+     *
+     * @param  name the boat name to find
+     * @return      the boat with the specified name
+     * @see         SQLException
+     */
     public ResultSet getTravelerBoatsWithEquipements(String name) {
         PreparedStatement stmt = null;
 
@@ -56,7 +84,13 @@ public class Db {
         return null;
     }
 
-
+    /**
+     * Returns all boats names
+     * Can throw an SQL exception
+     *
+     * @return      a list of all boat names
+     * @see         SQLException
+     */
     public ResultSet getBoatsName() {
         Statement stmt = null;
 
